@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeuroHub — Каталог нейросетей и библиотека промптов</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2L12 2Z" fill="#FFFFFF"/>
+          </svg>
+        </span>
+        <span>NeuroHub</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Основная навигация">
+        <a href="index.html" class="nav-link active">Главная</a>
+        <a href="catalog.html" class="nav-link">Каталог ИИ</a>
+        <a href="prompts.html" class="nav-link">Промпты</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="prompts.html#submit-form" class="btn btn-primary">Предложить ИИ / промпт</a>
+        <button type="button" class="burger-btn" id="burgerBtn" aria-label="Открыть меню" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Мобильная навигация">
+      <a href="index.html" class="nav-link active">Главная</a>
+      <a href="catalog.html" class="nav-link">Каталог ИИ</a>
+      <a href="prompts.html" class="nav-link">Промпты</a>
+      <a href="prompts.html#submit-form" class="btn btn-primary">Предложить ИИ / промпт</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-badge">120+ нейросетей &nbsp;·&nbsp; 250+ промптов &nbsp;·&nbsp; Обновляется еженедельно</div>
+        <h1>Все лучшие нейросети и рабочие промпты в одном месте</h1>
+        <p class="hero-desc">
+          Находите проверенные ИИ-инструменты под любую задачу — от генерации кода до видео — и сразу копируйте готовые промпты с понятными переменными.
+        </p>
+
+        <form class="hero-search" id="heroSearchForm">
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="20" y1="20" x2="16.5" y2="16.5"></line>
+              </svg>
+            </span>
+            <input type="search" id="heroSearchInput" class="input input-with-icon" placeholder="Например: генерация логотипа, Cursor, промпт для резюме...">
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">Найти</button>
+        </form>
+
+        <div class="hero-ctas">
+          <a href="catalog.html" class="btn btn-primary btn-lg">Открыть каталог ИИ</a>
+          <a href="prompts.html" class="btn btn-secondary btn-lg">Библиотека промптов</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Ключевые категории ИИ</h2>
+            <p class="section-subtitle">Выберите направление, чтобы перейти в каталог с готовым фильтром</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <a href="catalog.html?category=%D0%A2%D0%B5%D0%BA%D1%81%D1%82" class="card card-interactive category-card">
+            <div class="category-top">
+              <span class="mono-avatar">Aa</span>
+              <span class="count-label">28 моделей</span>
+            </div>
+            <h3 class="card-title">Текст и копирайтинг</h3>
+            <p class="card-desc">Статьи, редактура, переводы, саммари документов и сценарии</p>
+          </a>
+
+          <a href="catalog.html?category=%D0%9A%D0%BE%D0%B4" class="card card-interactive category-card">
+            <div class="category-top">
+              <span class="mono-avatar">&lt;/&gt;</span>
+              <span class="count-label">19 моделей</span>
+            </div>
+            <h3 class="card-title">Программирование</h3>
+            <p class="card-desc">Автодополнение кода, ревью, поиск багов и рефакторинг</p>
+          </a>
+
+          <a href="catalog.html?category=%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F" class="card card-interactive category-card">
+            <div class="category-top">
+              <span class="mono-avatar">IMG</span>
+              <span class="count-label">24 модели</span>
+            </div>
+            <h3 class="card-title">Изображения и дизайн</h3>
+            <p class="card-desc">Иллюстрации, логотипы, фотореализм и повышение качества</p>
+          </a>
+
+          <a href="catalog.html?category=%D0%92%D0%B8%D0%B4%D0%B5%D0%BE" class="card card-interactive category-card">
+            <div class="category-top">
+              <span class="mono-avatar">VID</span>
+              <span class="count-label">16 моделей</span>
+            </div>
+            <h3 class="card-title">Видео и анимация</h3>
+            <p class="card-desc">Генерация роликов из текста, аватары и умный монтаж</p>
+          </a>
+
+          <a href="catalog.html?category=%D0%90%D1%83%D0%B4%D0%B8%D0%BE" class="card card-interactive category-card">
+            <div class="category-top">
+              <span class="mono-avatar">WAV</span>
+              <span class="count-label">14 моделей</span>
+            </div>
+            <h3 class="card-title">Аудио и голос</h3>
+            <p class="card-desc">Озвучка на русском языке, клонирование голоса и музыка</p>
+          </a>
+
+          <a href="catalog.html" class="card card-interactive category-card">
+            <div class="category-top">
+              <span class="mono-avatar">BIZ</span>
+              <span class="count-label">21 модель</span>
+            </div>
+            <h3 class="card-title">Бизнес и аналитика</h3>
+            <p class="card-desc">Презентации, таблицы, автоматизация рутины и отчёты</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Популярные нейросети</h2>
+          <a href="catalog.html" class="btn btn-secondary">Все нейросети →</a>
+        </div>
+        <div class="grid-3" id="popularToolsGrid"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Промпты недели</h2>
+          <a href="prompts.html" class="btn btn-secondary">Вся библиотека →</a>
+        </div>
+        <div class="grid-2" id="weeklyPromptsGrid"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Почему выбирают NeuroHub</h2>
+        </div>
+        <div class="grid-4">
+          <div class="card">
+            <h3 class="card-title">Только проверенные ИИ</h3>
+            <p class="card-desc" style="margin-top: 8px;">Никакого информационного шума — в каталог попадают только рабочие сервисы с понятной пользой.</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">Честные теги стоимости</h3>
+            <p class="card-desc" style="margin-top: 8px;">Сразу видно, что полностью бесплатно, где есть лимит, а что можно развернуть локально.</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">Промпты с переменными</h3>
+            <p class="card-desc" style="margin-top: 8px;">Готовые шаблоны с [ПОДСКАЗКАМИ] — копируются в буфер обмена за один клик.</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">Открытое пополнение</h3>
+            <p class="card-desc" style="margin-top: 8px;">Любой пользователь может предложить новую нейросеть или свой удачный промпт.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-banner">
+          <div>
+            <h2 class="section-title">Знаете крутую нейросеть или написали сильный промпт?</h2>
+            <p class="section-subtitle">Поделитесь находкой с сообществом — мы проверим и добавим её в каталог в течение 24 часов.</p>
+          </div>
+          <a href="prompts.html#submit-form" class="btn btn-primary btn-lg">Добавить в каталог</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2L12 2Z" fill="#FFFFFF"/>
+              </svg>
+            </span>
+            <span>NeuroHub</span>
+          </a>
+          <p>Практичный каталог нейросетей и проверенных промптов. Находите лучшие ИИ-инструменты под задачу и сразу забирайте готовые запросы.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Навигация</h4>
+          <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="catalog.html">Каталог ИИ</a></li>
+            <li><a href="prompts.html">Библиотека промптов</a></li>
+            <li><a href="prompts.html#submit-form">Предложить инструмент</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Категории ИИ</h4>
+          <ul>
+            <li><a href="catalog.html?category=%D0%A2%D0%B5%D0%BA%D1%81%D1%82">Текст и копирайтинг</a></li>
+            <li><a href="catalog.html?category=%D0%9A%D0%BE%D0%B4">Программирование</a></li>
+            <li><a href="catalog.html?category=%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F">Изображения и дизайн</a></li>
+            <li><a href="catalog.html?category=%D0%92%D0%B8%D0%B4%D0%B5%D0%BE">Видео и анимация</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 NeuroHub — AI-хаб и библиотека промптов</span>
+        <span>Сделано для продуктивной работы с ИИ</span>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>

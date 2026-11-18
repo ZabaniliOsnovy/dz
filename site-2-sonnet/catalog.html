@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог нейросетей — NeuroHub</title>
+  <meta name="description" content="Список нейросетей с фильтрацией по задачам (текст, код, изображения, видео, аудио), цене и лицензии.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="catalog">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <span class="logo-mark" data-icon="sparkles"></span>
+        <span>NeuroHub</span>
+      </a>
+      <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav-panel">
+        <span data-icon="menu"></span>
+      </button>
+      <div class="nav-panel" id="nav-panel">
+        <nav class="main-nav" aria-label="Основная навигация">
+          <a href="index.html">Главная</a>
+          <a href="catalog.html" aria-current="page">Каталог ИИ</a>
+          <a href="prompts.html">Промпты</a>
+        </nav>
+        <div class="header-actions">
+          <form class="search-mini js-search" action="catalog.html" role="search">
+            <span data-icon="search"></span>
+            <label class="sr-only" for="headerSearch">Поиск по каталогу</label>
+            <input id="headerSearch" type="search" name="q" placeholder="Поиск по каталогу" autocomplete="off">
+          </form>
+          <a class="btn btn-primary btn-sm" href="prompts.html#suggest-tool">Предложить</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <div class="container">
+        <nav class="crumbs" aria-label="Хлебные крошки">
+          <a href="index.html">Главная</a>
+          <span>/</span>
+          <span aria-current="page">Каталог</span>
+        </nav>
+        <h1>Каталог нейросетей</h1>
+        <p>Подберите инструмент под задачу: фильтруйте по типу, цене и лицензии, ищите по названию и сразу переходите на сайт сервиса.</p>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="filters" id="filtersPanel" aria-label="Поиск и фильтры каталога">
+        <div style="display:flex;gap:12px;align-items:center">
+          <div class="input-wrap" style="flex:1">
+            <span data-icon="search"></span>
+            <label class="sr-only" for="catSearch">Поиск по названию или описанию</label>
+            <input id="catSearch" type="search" placeholder="Поиск по названию или описанию (например: код, озвучка, локально)" autocomplete="off">
+            <button class="clear-btn" id="catClear" type="button" aria-label="Очистить поиск">
+              <span data-icon="x"></span>
+            </button>
+          </div>
+          <button class="btn btn-secondary btn-sm filters-toggle" id="filtersToggle" type="button" aria-expanded="true" aria-controls="filtersPanel">
+            <span data-icon="sliders"></span>
+            <span>Фильтры</span>
+          </button>
+        </div>
+
+        <div class="filter-collapsible">
+          <span class="filter-label">Задача</span>
+          <div class="chips" id="catChips" role="group" aria-label="Фильтр по задаче">
+            <button class="chip" type="button" data-cat="all" aria-pressed="true">Все</button>
+            <button class="chip" type="button" data-cat="text" aria-pressed="false">Текст</button>
+            <button class="chip" type="button" data-cat="code" aria-pressed="false">Код</button>
+            <button class="chip" type="button" data-cat="image" aria-pressed="false">Изображения</button>
+            <button class="chip" type="button" data-cat="video" aria-pressed="false">Видео</button>
+            <button class="chip" type="button" data-cat="audio" aria-pressed="false">Аудио</button>
+          </div>
+        </div>
+
+        <div class="filter-row filter-collapsible">
+          <div>
+            <span class="filter-label">Цена и лицензия</span>
+            <div class="chips" id="priceChips" role="group" aria-label="Фильтр по цене и лицензии">
+              <button class="chip" type="button" data-price="free" aria-pressed="false">Бесплатно</button>
+              <button class="chip" type="button" data-price="paid" aria-pressed="false">Платно</button>
+              <button class="chip" type="button" data-price="os" aria-pressed="false">Open-source</button>
+            </div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+            <label class="sr-only" for="sortSelect">Сортировка</label>
+            <select class="select" id="sortSelect" aria-label="Сортировка">
+              <option value="popular">Популярные</option>
+              <option value="new">Новые</option>
+              <option value="alpha">По алфавиту</option>
+            </select>
+            <button class="btn-link" type="button" data-reset>Сбросить фильтры</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-row">
+        <div class="left">
+          <strong id="resultCount" aria-live="polite">Найдено: 19 нейросетей</strong>
+          <div class="chips" id="activeFilters" aria-label="Активные фильтры"></div>
+        </div>
+        <div class="view-switch" role="group" aria-label="Вид списка">
+          <button type="button" data-view="grid" aria-pressed="true" aria-label="Сетка">
+            <span data-icon="grid"></span>
+          </button>
+          <button type="button" data-view="list" aria-pressed="false" aria-label="Список">
+            <span data-icon="list"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-3" id="toolGrid"></div>
+
+      <div class="empty" id="emptyState" hidden>
+        <div class="tile" data-icon="search"></div>
+        <h3>Ничего не нашли</h3>
+        <p>Попробуйте изменить запрос, отключить часть фильтров или предложите нейросеть, которой нам не хватает.</p>
+        <div class="btns">
+          <button class="btn btn-primary" type="button" data-reset>Сбросить фильтры</button>
+          <a class="btn btn-secondary" href="prompts.html#suggest-tool">Предложить нейросеть</a>
+        </div>
+      </div>
+
+      <div class="more-wrap" id="moreWrap">
+        <button class="btn btn-secondary" id="moreBtn" type="button">Показать ещё</button>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-banner">
+          <div>
+            <h2>Не нашли нужное?</h2>
+            <p>Расскажите о нейросети, которой не хватает в каталоге, — мы проверим её и добавим в подборку.</p>
+            <a class="btn btn-grad" href="prompts.html#suggest-tool">Предложить нейросеть</a>
+          </div>
+          <div class="big-icon" aria-hidden="true">
+            <span data-icon="sparkles"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="modal" id="toolModal" aria-labelledby="modalTitle">
+    <button class="modal-close" type="button" aria-label="Закрыть окно">
+      <span data-icon="x"></span>
+    </button>
+    <div class="modal-body" id="modalBody"></div>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html">
+            <span class="logo-mark" data-icon="sparkles"></span>
+            <span>NeuroHub</span>
+          </a>
+          <p>Независимый каталог нейросетей и готовых промптов. Находите инструмент под задачу и сразу начинайте работу.</p>
+        </div>
+        <div>
+          <h4>Разделы</h4>
+          <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="catalog.html">Каталог ИИ</a></li>
+            <li><a href="prompts.html">Библиотека промптов</a></li>
+            <li><a href="prompts.html#suggest">Предложить своё</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Категории</h4>
+          <ul>
+            <li><a href="catalog.html?cat=text">Текст</a></li>
+            <li><a href="catalog.html?cat=code">Код</a></li>
+            <li><a href="catalog.html?cat=image">Изображения</a></li>
+            <li><a href="catalog.html?cat=video">Видео</a></li>
+            <li><a href="catalog.html?cat=audio">Аудио</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Контакты</h4>
+          <ul>
+            <li><a href="mailto:hello@neurohub.ru">hello@neurohub.ru</a></li>
+            <li><a href="https://t.me" target="_blank" rel="noopener noreferrer">Telegram</a></li>
+            <li><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year">2026</span> NeuroHub. Все права защищены.</span>
+        <span>Сервисы принадлежат их владельцам, условия и цены уточняйте на сайтах.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

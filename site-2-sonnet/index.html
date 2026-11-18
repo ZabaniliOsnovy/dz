@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeuroHub — каталог нейросетей и промптов в одном месте</title>
+  <meta name="description" content="Независимый справочник нейросетей и готовых промптов: подберите инструмент под задачу и сразу скопируйте рабочий шаблон.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="home">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <span class="logo-mark" data-icon="sparkles"></span>
+        <span>NeuroHub</span>
+      </a>
+      <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav-panel">
+        <span data-icon="menu"></span>
+      </button>
+      <div class="nav-panel" id="nav-panel">
+        <nav class="main-nav" aria-label="Основная навигация">
+          <a href="index.html" aria-current="page">Главная</a>
+          <a href="catalog.html">Каталог ИИ</a>
+          <a href="prompts.html">Промпты</a>
+        </nav>
+        <div class="header-actions">
+          <form class="search-mini js-search" action="catalog.html" role="search">
+            <span data-icon="search"></span>
+            <label class="sr-only" for="headerSearch">Поиск по каталогу</label>
+            <input id="headerSearch" type="search" name="q" placeholder="Поиск по каталогу" autocomplete="off">
+          </form>
+          <a class="btn btn-primary btn-sm" href="prompts.html#suggest">Предложить</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-dots" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div>
+          <div class="eyebrow">
+            <span data-icon="sparkles"></span>
+            <span>Каталог нейросетей и промптов</span>
+          </div>
+          <h1>Все нейросети и промпты <span class="grad-text">в одном месте</span></h1>
+          <p class="lead">Подберите нейросеть под вашу задачу и сразу получите готовый промпт — бесплатно, без регистрации и рекламы.</p>
+          <form class="hero-search" action="catalog.html" role="search">
+            <span data-icon="search"></span>
+            <label class="sr-only" for="heroSearch">Что хотите сделать?</label>
+            <input id="heroSearch" type="search" name="q" placeholder="Что хотите сделать? Например: написать текст, нарисовать логотип" autocomplete="off">
+            <button class="btn btn-primary btn-sm" type="submit">Найти</button>
+          </form>
+          <div class="chips" aria-label="Быстрый выбор задачи">
+            <a class="chip" href="catalog.html?cat=text">Текст</a>
+            <a class="chip" href="catalog.html?cat=code">Код</a>
+            <a class="chip" href="catalog.html?cat=image">Изображения</a>
+            <a class="chip" href="catalog.html?cat=video">Видео</a>
+            <a class="chip" href="catalog.html?cat=audio">Аудио</a>
+          </div>
+          <div class="hero-cta">
+            <a class="btn btn-grad" href="catalog.html">Открыть каталог</a>
+            <a class="btn btn-secondary" href="prompts.html">Библиотека промптов</a>
+          </div>
+          <div class="hero-stats">
+            <span><b>120+</b> нейросетей</span>
+            <span>·</span>
+            <span><b>300+</b> промптов</span>
+            <span>·</span>
+            <span>обновляется каждую неделю</span>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="Примеры карточек из каталога">
+          <div class="float-card cat-text">
+            <span class="tile" data-icon="text"></span>
+            <div class="info">
+              <strong>ChatGPT</strong>
+              <span class="sub">Текст · анализ и диалог</span>
+            </div>
+            <span class="badge free">Бесплатно</span>
+          </div>
+          <div class="float-card cat-image">
+            <span class="tile" data-icon="image"></span>
+            <div class="info">
+              <strong>Midjourney</strong>
+              <span class="sub">Изображения · иллюстрации</span>
+            </div>
+            <span class="badge paid">Платно</span>
+          </div>
+          <div class="float-card cat-code">
+            <span class="tile" data-icon="code"></span>
+            <div class="info">
+              <strong>Cursor</strong>
+              <span class="sub">Код · редактор с ИИ</span>
+            </div>
+            <span class="badge free">Бесплатно</span>
+          </div>
+          <div class="float-prompt">
+            <div class="ok">
+              <span>Промпт скопирован</span>
+              <span data-icon="check"></span>
+            </div>
+            <code>Ты — опытный маркетолог. Напиши 3 варианта поста…</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Ключевые категории</h2>
+            <p>Выберите задачу — мы покажем подходящие инструменты</p>
+          </div>
+          <a class="btn-link" href="catalog.html">Весь каталог <span data-icon="arrow"></span></a>
+        </div>
+        <div class="grid grid-5">
+          <a class="card cat-card cat-text" href="catalog.html?cat=text">
+            <span class="tile lg" data-icon="text"></span>
+            <h3>Текст</h3>
+            <p>Чат-боты, статьи, редактура и переводы</p>
+            <span class="count" data-count="text">6 инструментов</span>
+          </a>
+          <a class="card cat-card cat-code" href="catalog.html?cat=code">
+            <span class="tile lg" data-icon="code"></span>
+            <h3>Код</h3>
+            <p>Помощники разработчика, ревью и тесты</p>
+            <span class="count" data-count="code">4 инструмента</span>
+          </a>
+          <a class="card cat-card cat-image" href="catalog.html?cat=image">
+            <span class="tile lg" data-icon="image"></span>
+            <h3>Изображения</h3>
+            <p>Генерация иллюстраций, фото и дизайна</p>
+            <span class="count" data-count="image">3 инструмента</span>
+          </a>
+          <a class="card cat-card cat-video" href="catalog.html?cat=video">
+            <span class="tile lg" data-icon="video"></span>
+            <h3>Видео</h3>
+            <p>Короткие ролики, анимация и монтаж</p>
+            <span class="count" data-count="video">3 инструмента</span>
+          </a>
+          <a class="card cat-card cat-audio" href="catalog.html?cat=audio">
+            <span class="tile lg" data-icon="audio"></span>
+            <h3>Аудио</h3>
+            <p>Музыка, синтез речи и расшифровка</p>
+            <span class="count" data-count="audio">3 инструмента</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt reveal">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Популярные нейросети</h2>
+            <p>Проверенные сервисы с понятными условиями доступа</p>
+          </div>
+          <a class="btn-link" href="catalog.html">Весь каталог <span data-icon="arrow"></span></a>
+        </div>
+        <div class="chips section-tabs" role="group" aria-label="Подборки нейросетей">
+          <button class="chip" type="button" data-tab="top" aria-pressed="true">Топ недели</button>
+          <button class="chip" type="button" data-tab="new" aria-pressed="false">Новые</button>
+          <button class="chip" type="button" data-tab="free" aria-pressed="false">Бесплатные</button>
+        </div>
+        <div class="grid grid-3" id="homeTools"></div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Популярные промпты</h2>
+            <p>Скопируйте шаблон и замените [переменные] своими данными</p>
+          </div>
+          <a class="btn-link" href="prompts.html">Все промпты <span data-icon="arrow"></span></a>
+        </div>
+        <div class="grid grid-3" id="homePrompts"></div>
+      </div>
+    </section>
+
+    <section class="section alt reveal">
+      <div class="container">
+        <div class="section-head center">
+          <h2>Как это работает</h2>
+          <p>Три шага от вашей задачи до готового результата</p>
+        </div>
+        <div class="grid grid-3">
+          <article class="card step">
+            <span class="step-num">1</span>
+            <h3>Выберите задачу</h3>
+            <p>Текст, код, картинки, видео или звук — укажите в фильтре или поиске, что именно вам нужно сделать.</p>
+          </article>
+          <article class="card step">
+            <span class="step-num">2</span>
+            <h3>Подберите инструмент</h3>
+            <p>Отфильтруйте нейросети по цене и лицензии, сравните сильные стороны и ограничения в карточке.</p>
+          </article>
+          <article class="card step">
+            <span class="step-num">3</span>
+            <h3>Скопируйте промпт</h3>
+            <p>Возьмите готовый шаблон в один клик, подставьте свои данные в квадратные скобки и запускайте.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="container">
+        <div class="section-head center">
+          <h2>Почему NeuroHub</h2>
+          <p>Честный справочник без рекламных обещаний и сложного жаргона</p>
+        </div>
+        <div class="grid grid-3">
+          <article class="card feature">
+            <span class="tile" data-icon="shield"></span>
+            <h3>Независимые описания</h3>
+            <p>Мы не продаём места в подборках и прямо пишем как о плюсах, так и об ограничениях каждого сервиса.</p>
+          </article>
+          <article class="card feature">
+            <span class="tile" data-icon="filter"></span>
+            <h3>Фильтры по цене и лицензии</h3>
+            <p>Сразу видно, где есть бесплатный тариф, где нужна подписка, а какую модель можно развернуть у себя.</p>
+          </article>
+          <article class="card feature">
+            <span class="tile" data-icon="zap"></span>
+            <h3>Промпты, готовые к работе</h3>
+            <p>Все шаблоны проверены на практике и размечены понятными переменными для быстрой подстановки.</p>
+          </article>
+          <article class="card feature">
+            <span class="tile" data-icon="refresh"></span>
+            <h3>Регулярные обновления</h3>
+            <p>Мы каждую неделю проверяем ссылки, добавляем новые модели и актуализируем условия доступа.</p>
+          </article>
+          <article class="card feature">
+            <span class="tile" data-icon="gift"></span>
+            <h3>Бесплатный доступ</h3>
+            <p>Весь каталог и библиотека промптов открыты без регистрации, подписок и навязчивых окон.</p>
+          </article>
+          <article class="card feature">
+            <span class="tile" data-icon="users"></span>
+            <h3>Вклад сообщества</h3>
+            <p>Любой читатель может предложить полезную нейросеть или свой рабочий промпт через удобную форму.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="container">
+        <div class="cta-banner">
+          <div>
+            <h2>Знаете крутую нейросеть или промпт?</h2>
+            <p>Поделитесь находкой с сообществом — мы проверим описание и добавим его в каталог или библиотеку.</p>
+            <div class="hero-cta">
+              <a class="btn btn-grad" href="prompts.html#suggest">Предложить промпт</a>
+              <a class="btn btn-secondary" href="prompts.html#suggest-tool">Предложить нейросеть</a>
+            </div>
+          </div>
+          <div class="big-icon" aria-hidden="true">
+            <span data-icon="sparkles"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html">
+            <span class="logo-mark" data-icon="sparkles"></span>
+            <span>NeuroHub</span>
+          </a>
+          <p>Независимый каталог нейросетей и готовых промптов. Находите инструмент под задачу и сразу начинайте работу.</p>
+        </div>
+        <div>
+          <h4>Разделы</h4>
+          <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="catalog.html">Каталог ИИ</a></li>
+            <li><a href="prompts.html">Библиотека промптов</a></li>
+            <li><a href="prompts.html#suggest">Предложить своё</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Категории</h4>
+          <ul>
+            <li><a href="catalog.html?cat=text">Текст</a></li>
+            <li><a href="catalog.html?cat=code">Код</a></li>
+            <li><a href="catalog.html?cat=image">Изображения</a></li>
+            <li><a href="catalog.html?cat=video">Видео</a></li>
+            <li><a href="catalog.html?cat=audio">Аудио</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Контакты</h4>
+          <ul>
+            <li><a href="mailto:hello@neurohub.ru">hello@neurohub.ru</a></li>
+            <li><a href="https://t.me" target="_blank" rel="noopener noreferrer">Telegram</a></li>
+            <li><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year">2026</span> NeuroHub. Все права защищены.</span>
+        <span>Сервисы принадлежат их владельцам, условия и цены уточняйте на сайтах.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

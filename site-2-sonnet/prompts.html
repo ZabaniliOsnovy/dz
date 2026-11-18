@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Библиотека промптов — NeuroHub</title>
+  <meta name="description" content="Готовые промпты по категориям с быстрым копированием, фильтрами по нейросети и формой для предложения своих шаблонов.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="prompts">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">
+        <span class="logo-mark" data-icon="sparkles"></span>
+        <span>NeuroHub</span>
+      </a>
+      <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav-panel">
+        <span data-icon="menu"></span>
+      </button>
+      <div class="nav-panel" id="nav-panel">
+        <nav class="main-nav" aria-label="Основная навигация">
+          <a href="index.html">Главная</a>
+          <a href="catalog.html">Каталог ИИ</a>
+          <a href="prompts.html" aria-current="page">Промпты</a>
+        </nav>
+        <div class="header-actions">
+          <form class="search-mini js-search" action="catalog.html" role="search">
+            <span data-icon="search"></span>
+            <label class="sr-only" for="headerSearch">Поиск по каталогу</label>
+            <input id="headerSearch" type="search" name="q" placeholder="Поиск по каталогу" autocomplete="off">
+          </form>
+          <a class="btn btn-primary btn-sm" href="#suggest">Предложить</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-head">
+      <div class="container">
+        <nav class="crumbs" aria-label="Хлебные крошки">
+          <a href="index.html">Главная</a>
+          <span>/</span>
+          <span aria-current="page">Промпты</span>
+        </nav>
+        <h1>Библиотека промптов</h1>
+        <p>Скопируйте промпт, замените <span style="color:var(--accent-2);font-family:var(--font-mono)">[переменные]</span> своими данными — и запускайте в подходящей нейросети.</p>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="filters" id="filtersPanel" aria-label="Поиск и фильтры промптов">
+        <div style="display:flex;gap:12px;align-items:center">
+          <div class="input-wrap" style="flex:1">
+            <span data-icon="search"></span>
+            <label class="sr-only" for="pSearch">Поиск по тексту промптов</label>
+            <input id="pSearch" type="search" placeholder="Поиск по названию, тексту или нейросети" autocomplete="off">
+            <button class="clear-btn" id="pClear" type="button" aria-label="Очистить поиск">
+              <span data-icon="x"></span>
+            </button>
+          </div>
+          <button class="btn btn-secondary btn-sm filters-toggle" id="filtersToggle" type="button" aria-expanded="true" aria-controls="filtersPanel">
+            <span data-icon="sliders"></span>
+            <span>Фильтры</span>
+          </button>
+        </div>
+
+        <div class="filter-collapsible">
+          <span class="filter-label">Категория</span>
+          <div class="chips" id="pCatChips" role="group" aria-label="Категория промпта">
+            <button class="chip" type="button" data-pcat="" aria-pressed="true">Все</button>
+            <button class="chip" type="button" data-pcat="marketing" aria-pressed="false">Тексты и маркетинг</button>
+            <button class="chip" type="button" data-pcat="code" aria-pressed="false">Код и разработка</button>
+            <button class="chip" type="button" data-pcat="image" aria-pressed="false">Изображения</button>
+            <button class="chip" type="button" data-pcat="video" aria-pressed="false">Видео</button>
+            <button class="chip" type="button" data-pcat="audio" aria-pressed="false">Аудио</button>
+            <button class="chip" type="button" data-pcat="study" aria-pressed="false">Учёба и работа</button>
+            <button class="chip" type="button" data-pcat="business" aria-pressed="false">Бизнес</button>
+          </div>
+        </div>
+
+        <div class="filter-row filter-collapsible">
+          <div class="selects">
+            <select class="select" id="fTool" aria-label="Целевая нейросеть">
+              <option value="">Нейросеть: любая</option>
+            </select>
+            <select class="select" id="fLevel" aria-label="Сложность">
+              <option value="">Сложность: любая</option>
+              <option value="novice">Новичок</option>
+              <option value="pro">Продвинутый</option>
+            </select>
+            <select class="select" id="fLang" aria-label="Язык промпта">
+              <option value="">Язык: RU / EN</option>
+              <option value="RU">Русский (RU)</option>
+              <option value="EN">Английский (EN)</option>
+            </select>
+          </div>
+          <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+            <select class="select" id="fSort" aria-label="Сортировка">
+              <option value="popular">Популярные</option>
+              <option value="new">Новые</option>
+            </select>
+            <button class="btn-link" type="button" data-reset>Сбросить фильтры</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-row">
+        <div class="left">
+          <strong id="pCount" aria-live="polite">Найдено: 12 промптов</strong>
+        </div>
+      </div>
+
+      <div class="grid grid-2" id="promptGrid"></div>
+
+      <div class="empty" id="pEmpty" hidden>
+        <div class="tile" data-icon="search"></div>
+        <h3>Промпты не найдены</h3>
+        <p>Сбросьте часть фильтров или предложите свой шаблон через форму ниже.</p>
+        <div class="btns">
+          <button class="btn btn-primary" type="button" data-reset>Сбросить фильтры</button>
+          <a class="btn btn-secondary" href="#suggest">Предложить промпт</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Как писать хорошие промпты</h2>
+            <p>Пять простых приёмов, которые делают ответ нейросети заметно точнее</p>
+          </div>
+        </div>
+        <div class="accordion">
+          <div class="acc-item open">
+            <button class="acc-btn" type="button" aria-expanded="true">
+              <span>1. Задайте роль</span>
+              <span data-icon="down"></span>
+            </button>
+            <div class="acc-panel">
+              <p>Укажите, с какой позиции должна отвечать модель: опытного редактора, строгого ревьюера кода, преподавателя или маркетолога. Это сразу настраивает терминологию и глубину ответа.</p>
+              <div class="example">Пример: «Ты — технический редактор. Перепиши абзац проще, без канцеляризмов…»</div>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" type="button" aria-expanded="false">
+              <span>2. Опишите контекст и аудиторию</span>
+              <span data-icon="down"></span>
+            </button>
+            <div class="acc-panel">
+              <p>Расскажите, для кого и зачем создаётся результат: кто читатель, что он уже знает, где будет опубликован текст или в каком окружении работает код.</p>
+              <div class="example">Пример: «Аудитория — владельцы небольших кофеен без опыта в рекламе…»</div>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" type="button" aria-expanded="false">
+              <span>3. Сформулируйте конкретную задачу</span>
+              <span data-icon="down"></span>
+            </button>
+            <div class="acc-panel">
+              <p>Используйте однозначные глаголы: «составь таблицу», «найди 3 ошибки», «предложи 5 заголовков». Разбивайте сложную задачу на последовательные шаги.</p>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" type="button" aria-expanded="false">
+              <span>4. Укажите формат и ограничения</span>
+              <span data-icon="down"></span>
+            </button>
+            <div class="acc-panel">
+              <p>Задайте объём, структуру (список, таблица, JSON), тон и то, чего делать не нужно — например, избегать общих фраз и выдуманных фактов.</p>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" type="button" aria-expanded="false">
+              <span>5. Добавьте пример или попросите задать вопросы</span>
+              <span data-icon="down"></span>
+            </button>
+            <div class="acc-panel">
+              <p>Один короткий образец желаемого стиля работает лучше длинного описания. А фраза «сначала задай до 5 уточняющих вопросов» спасает от поверхностных ответов.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt reveal" id="suggest">
+      <div id="suggest-tool" aria-hidden="true"></div>
+      <div class="container">
+        <div class="section-head center">
+          <h2>Предложите свой промпт или нейросеть</h2>
+          <p>Все предложения проходят ручную модерацию — обычно это занимает пару дней</p>
+        </div>
+
+        <div class="form-card" id="suggestCard">
+          <div class="tabs" role="tablist" aria-label="Что вы хотите предложить">
+            <button class="tab" type="button" role="tab" data-tab="prompt" aria-selected="true">Предложить промпт</button>
+            <button class="tab" type="button" role="tab" data-tab="tool" aria-selected="false">Предложить нейросеть</button>
+          </div>
+
+          <form id="formPrompt" class="form-grid" novalidate>
+            <div class="hp" aria-hidden="true">
+              <label>Не заполняйте это поле<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+            </div>
+            <div class="field">
+              <label for="sp_title">Название промпта <span class="req">*</span></label>
+              <input class="control" id="sp_title" name="sp_title" type="text" placeholder="Например: Пост для соцсетей" required>
+              <div class="hint"><span class="msg">Коротко и понятно</span></div>
+            </div>
+            <div class="field">
+              <label for="sp_cat">Категория <span class="req">*</span></label>
+              <select class="control" id="sp_cat" name="sp_cat" required>
+                <option value="">Выберите категорию</option>
+                <option value="marketing">Тексты и маркетинг</option>
+                <option value="code">Код и разработка</option>
+                <option value="image">Изображения</option>
+                <option value="video">Видео</option>
+                <option value="audio">Аудио</option>
+                <option value="study">Учёба и работа</option>
+                <option value="business">Бизнес</option>
+              </select>
+              <div class="hint"><span class="msg">Основная область применения</span></div>
+            </div>
+            <div class="field">
+              <label for="sp_tool">Целевая нейросеть <span class="req">*</span></label>
+              <input class="control" id="sp_tool" name="sp_tool" type="text" placeholder="Например: ChatGPT, Claude, Midjourney" required>
+              <div class="hint"><span class="msg">Где шаблон работает лучше всего</span></div>
+            </div>
+            <div class="field span-3">
+              <label for="sp_text">Текст промпта <span class="req">*</span></label>
+              <textarea class="control" id="sp_text" name="sp_text" data-max="1000" data-counter="spCounter" placeholder="Вставьте текст шаблона, а меняющиеся части заключите в квадратные скобки: [тема], [аудитория]" required></textarea>
+              <div class="hint">
+                <span class="msg">От 30 до 1000 символов, переменные в [скобках]</span>
+                <span id="spCounter">0 / 1000</span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="sp_email">Email (необязательно)</label>
+              <input class="control" id="sp_email" name="sp_email" type="email" placeholder="name@example.com">
+              <div class="hint"><span class="msg">Напишем, когда опубликуем</span></div>
+            </div>
+            <div class="field span-2" style="justify-content:center">
+              <label class="check">
+                <input type="checkbox" name="sp_agree" required>
+                <span>Согласен на обработку данных и публикацию промпта в открытой библиотеке <span class="req">*</span></span>
+              </label>
+              <div class="hint"><span class="msg"></span></div>
+            </div>
+            <div class="form-actions">
+              <span style="color:var(--text-muted);font-size:13px"><span class="req">*</span> — обязательные поля</span>
+              <button class="btn btn-grad" type="submit">Отправить на модерацию</button>
+            </div>
+          </form>
+
+          <form id="formTool" class="form-grid" hidden novalidate>
+            <div class="hp" aria-hidden="true">
+              <label>Не заполняйте это поле<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+            </div>
+            <div class="field">
+              <label for="st_name">Название нейросети <span class="req">*</span></label>
+              <input class="control" id="st_name" name="st_name" type="text" placeholder="Например: Perplexity" required>
+              <div class="hint"><span class="msg">Официальное название сервиса</span></div>
+            </div>
+            <div class="field">
+              <label for="st_url">Ссылка на сайт <span class="req">*</span></label>
+              <input class="control" id="st_url" name="st_url" type="url" placeholder="https://example.com" required>
+              <div class="hint"><span class="msg">Прямая ссылка без реферальных меток</span></div>
+            </div>
+            <div class="field">
+              <label for="st_task">Основная задача <span class="req">*</span></label>
+              <select class="control" id="st_task" name="st_task" required>
+                <option value="">Выберите задачу</option>
+                <option value="text">Текст</option>
+                <option value="code">Код</option>
+                <option value="image">Изображения</option>
+                <option value="video">Видео</option>
+                <option value="audio">Аудио</option>
+              </select>
+              <div class="hint"><span class="msg">Категория в каталоге</span></div>
+            </div>
+            <div class="field span-3">
+              <span class="label">Условия доступа <span class="req">*</span></span>
+              <div class="radio-row" role="radiogroup" aria-label="Условия доступа">
+                <label><input type="radio" name="st_price" value="free"> Бесплатно / есть бесплатный план</label>
+                <label><input type="radio" name="st_price" value="paid"> Только платно</label>
+                <label><input type="radio" name="st_price" value="os"> Open-source</label>
+              </div>
+              <div class="hint"><span class="msg">Выберите наиболее точный вариант</span></div>
+            </div>
+            <div class="field span-3">
+              <label for="st_desc">Краткое описание <span class="req">*</span></label>
+              <textarea class="control" id="st_desc" name="st_desc" data-max="300" data-counter="stCounter" placeholder="Чем полезна эта нейросеть, какие у неё сильные стороны и ограничения" required></textarea>
+              <div class="hint">
+                <span class="msg">От 20 до 300 символов, без рекламных штампов</span>
+                <span id="stCounter">0 / 300</span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="st_email">Email (необязательно)</label>
+              <input class="control" id="st_email" name="st_email" type="email" placeholder="name@example.com">
+              <div class="hint"><span class="msg">Напишем, если будут вопросы</span></div>
+            </div>
+            <div class="field span-2" style="justify-content:center">
+              <label class="check">
+                <input type="checkbox" name="st_agree" required>
+                <span>Подтверждаю точность сведений и согласие на публикацию в каталоге <span class="req">*</span></span>
+              </label>
+              <div class="hint"><span class="msg"></span></div>
+            </div>
+            <div class="form-actions">
+              <span style="color:var(--text-muted);font-size:13px"><span class="req">*</span> — обязательные поля</span>
+              <button class="btn btn-grad" type="submit">Отправить на модерацию</button>
+            </div>
+          </form>
+
+          <div class="success" role="status" aria-live="polite">
+            <div class="tile" data-icon="check"></div>
+            <h3>Спасибо! Заявка отправлена на модерацию</h3>
+            <p id="successText">Мы проверим ваше предложение в течение нескольких дней.</p>
+            <button class="btn btn-secondary" id="againBtn" type="button">Отправить ещё</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="index.html">
+            <span class="logo-mark" data-icon="sparkles"></span>
+            <span>NeuroHub</span>
+          </a>
+          <p>Независимый каталог нейросетей и готовых промптов. Находите инструмент под задачу и сразу начинайте работу.</p>
+        </div>
+        <div>
+          <h4>Разделы</h4>
+          <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="catalog.html">Каталог ИИ</a></li>
+            <li><a href="prompts.html">Библиотека промптов</a></li>
+            <li><a href="#suggest">Предложить своё</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Категории</h4>
+          <ul>
+            <li><a href="catalog.html?cat=text">Текст</a></li>
+            <li><a href="catalog.html?cat=code">Код</a></li>
+            <li><a href="catalog.html?cat=image">Изображения</a></li>
+            <li><a href="catalog.html?cat=video">Видео</a></li>
+            <li><a href="catalog.html?cat=audio">Аудио</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Контакты</h4>
+          <ul>
+            <li><a href="mailto:hello@neurohub.ru">hello@neurohub.ru</a></li>
+            <li><a href="https://t.me" target="_blank" rel="noopener noreferrer">Telegram</a></li>
+            <li><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year">2026</span> NeuroHub. Все права защищены.</span>
+        <span>Сервисы принадлежат их владельцам, условия и цены уточняйте на сайтах.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

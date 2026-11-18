@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Библиотека промптов — NeuroHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2L12 2Z" fill="#FFFFFF"/>
+          </svg>
+        </span>
+        <span>NeuroHub</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Основная навигация">
+        <a href="index.html" class="nav-link">Главная</a>
+        <a href="catalog.html" class="nav-link">Каталог ИИ</a>
+        <a href="prompts.html" class="nav-link active">Промпты</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#submit-form" class="btn btn-primary">Предложить ИИ / промпт</a>
+        <button type="button" class="burger-btn" id="burgerBtn" aria-label="Открыть меню" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Мобильная навигация">
+      <a href="index.html" class="nav-link">Главная</a>
+      <a href="catalog.html" class="nav-link">Каталог ИИ</a>
+      <a href="prompts.html" class="nav-link active">Промпты</a>
+      <a href="#submit-form" class="btn btn-primary">Предложить ИИ / промпт</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <div class="breadcrumbs">
+          <a href="index.html">Главная</a>
+          <span>/</span>
+          <span>Библиотека промптов</span>
+        </div>
+        <div class="page-title-row">
+          <h1>Библиотека промптов</h1>
+          <a href="#submit-form" class="btn btn-secondary">Предложить свой ↓</a>
+        </div>
+        <p class="section-subtitle">
+          Готовые шаблоны запросов для нейросетей. Копируйте промпт в один клик и заменяйте текст в <span class="prompt-var">[КВАДРАТНЫХ СКОБКАХ]</span> на свои данные.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="filter-panel">
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="20" y1="20" x2="16.5" y2="16.5"></line>
+              </svg>
+            </span>
+            <input type="search" id="promptsSearch" class="input input-with-icon" placeholder="Поиск по названию, тексту промпта или тегам...">
+          </div>
+
+          <div class="filter-row" id="promptCatRow">
+            <button type="button" class="pill active" data-value="Все">Все</button>
+            <button type="button" class="pill" data-value="Копирайтинг">Копирайтинг</button>
+            <button type="button" class="pill" data-value="Программирование">Программирование</button>
+            <button type="button" class="pill" data-value="Дизайн и Midjourney">Дизайн и Midjourney</button>
+            <button type="button" class="pill" data-value="Обучение">Обучение</button>
+            <button type="button" class="pill" data-value="Бизнес">Бизнес</button>
+          </div>
+        </div>
+
+        <div class="grid-2" id="promptsGrid"></div>
+
+        <div class="empty-state" id="promptsEmpty" style="display: none;">
+          <h3>Подходящих промптов не найдено</h3>
+          <p>Попробуйте другой поисковый запрос или выберите другую категорию.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="submit-form">
+      <div class="container">
+        <div class="submit-card">
+          <h2 class="section-title">Предложить свой промпт или нейросеть</h2>
+          <p class="section-subtitle">
+            Поделитесь проверенным запросом или полезным ИИ-сервисом. После быстрой модерации материал появится в общем каталоге.
+          </p>
+
+          <div class="filter-row" id="typeToggleRow" style="margin-top: 24px;">
+            <button type="button" class="pill active" data-type="prompt">Предложить промпт</button>
+            <button type="button" class="pill" data-type="tool">Предложить нейросеть</button>
+          </div>
+
+          <form id="submissionForm" novalidate>
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="form-label" id="titleLabel" for="itemTitle">Название промпта *</label>
+                <input type="text" id="itemTitle" class="input" placeholder="Например: Генератор структуры презентации" required>
+                <span class="field-error">Укажите название (минимум 3 символа)</span>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="itemCategory">Категория *</label>
+                <select id="itemCategory" class="select" required>
+                  <option value="">Выберите категорию</option>
+                  <option value="Копирайтинг">Копирайтинг и маркетинг</option>
+                  <option value="Программирование">Программирование</option>
+                  <option value="Дизайн и Midjourney">Дизайн и изображения</option>
+                  <option value="Обучение">Обучение и анализ</option>
+                  <option value="Бизнес">Бизнес и продуктивность</option>
+                </select>
+                <span class="field-error">Выберите категорию</span>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" id="targetLabel" for="itemTarget">Целевая нейросеть *</label>
+                <input type="text" id="itemTarget" class="input" placeholder="ChatGPT, Claude, Midjourney..." required>
+                <span class="field-error">Заполните это поле корректно</span>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="itemAuthor">Ваше имя или ник (необязательно)</label>
+                <input type="text" id="itemAuthor" class="input" placeholder="@username">
+              </div>
+
+              <div class="form-field full">
+                <label class="form-label" id="bodyLabel" for="itemBody">Текст промпта *</label>
+                <textarea id="itemBody" class="textarea" placeholder="Вставьте текст промпта. Переменные выделите в [КВАДРАТНЫЕ СКОБКИ]..." required></textarea>
+                <span class="field-error">Введите текст (минимум 12 символов)</span>
+              </div>
+            </div>
+
+            <div class="form-footer">
+              <span class="form-hint">Без спама и реферальных ссылок. Проверка занимает до 24 часов.</span>
+              <button type="submit" class="btn btn-primary btn-lg">Отправить на модерацию</button>
+            </div>
+          </form>
+
+          <div class="form-success" id="formSuccess">
+            <h3>Спасибо! Заявка отправлена на проверку</h3>
+            <p>Мы сохранили ваше предложение и рассмотрим его в ближайшее время.</p>
+            <button type="button" class="btn btn-secondary" id="sendAnotherBtn">Отправить ещё одну</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2L12 2Z" fill="#FFFFFF"/>
+              </svg>
+            </span>
+            <span>NeuroHub</span>
+          </a>
+          <p>Практичный каталог нейросетей и проверенных промптов. Находите лучшие ИИ-инструменты под задачу и сразу забирайте готовые запросы.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Навигация</h4>
+          <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="catalog.html">Каталог ИИ</a></li>
+            <li><a href="prompts.html">Библиотека промптов</a></li>
+            <li><a href="prompts.html#submit-form">Предложить инструмент</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Категории ИИ</h4>
+          <ul>
+            <li><a href="catalog.html?category=%D0%A2%D0%B5%D0%BA%D1%81%D1%82">Текст и копирайтинг</a></li>
+            <li><a href="catalog.html?category=%D0%9A%D0%BE%D0%B4">Программирование</a></li>
+            <li><a href="catalog.html?category=%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F">Изображения и дизайн</a></li>
+            <li><a href="catalog.html?category=%D0%92%D0%B8%D0%B4%D0%B5%D0%BE">Видео и анимация</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 NeuroHub — AI-хаб и библиотека промптов</span>
+        <span>Сделано для продуктивной работы с ИИ</span>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>

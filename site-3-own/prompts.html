@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Библиотека промптов</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">AI-Справочник</div>
+        <nav class="menu">
+            <a href="index.html">Главная</a>
+            <a href="catalog.html">Каталог ИИ</a>
+            <a href="prompts.html">Библиотека промптов</a>
+        </nav>
+    </header>
+
+    <h1 class="title">Библиотека промптов</h1>
+    <p class="subtitle">Готовые шаблоны запросов для разных задач</p>
+
+    <section class="cards">
+        <div class="card">
+            <h3>Конспект текста</h3>
+            <span class="tag">Учёба</span>
+            <div class="prompt-box">Сделай краткий конспект по этому тексту и выдели 3 главных вывода: [текст]</div>
+            <button class="btn copy-btn">Скопировать</button>
+        </div>
+
+        <div class="card">
+            <h3>Поиск ошибки</h3>
+            <span class="tag">Код</span>
+            <div class="prompt-box">Вот ошибка: [ошибка]. Вот мой код: [код]. Объясни, почему она возникла.</div>
+            <button class="btn copy-btn">Скопировать</button>
+        </div>
+
+        <div class="card">
+            <h3>Подготовка к зачёту</h3>
+            <span class="tag">Учёба</span>
+            <div class="prompt-box">Задай мне 5 вопросов по теме [тема] и проверь мои ответы.</div>
+            <button class="btn copy-btn">Скопировать</button>
+        </div>
+    </section>
+
+    <h2 class="title">Предложить свой вариант</h2>
+    <form class="form-block" id="myForm">
+        <label>Название нейросети или промпта:</label>
+        <input type="text" name="name" placeholder="Например: Cursor">
+
+        <label>Описание:</label>
+        <textarea name="text" rows="4" placeholder="Напишите описание..."></textarea>
+
+        <button type="submit" class="btn">Отправить</button>
+        <p id="result"></p>
+    </form>
+
+    <footer class="footer">
+        <p>© 2026 AI-Справочник</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

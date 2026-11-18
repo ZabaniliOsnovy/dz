@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог ИИ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">AI-Справочник</div>
+        <nav class="menu">
+            <a href="index.html">Главная</a>
+            <a href="catalog.html">Каталог ИИ</a>
+            <a href="prompts.html">Библиотека промптов</a>
+        </nav>
+    </header>
+
+    <h1 class="title">Каталог нейросетей</h1>
+    <p class="subtitle">Выберите нужную категорию:</p>
+
+    <div class="filters">
+        <button class="filter-btn active" data-cat="all">Все</button>
+        <button class="filter-btn" data-cat="text">Текст</button>
+        <button class="filter-btn" data-cat="code">Код</button>
+        <button class="filter-btn" data-cat="image">Картинки</button>
+    </div>
+
+    <section class="cards">
+        <div class="card card-item text">
+            <h3>ChatGPT</h3>
+            <span class="tag">Freemium</span>
+            <p>Универсальная нейросеть для ответов на вопросы, текстов и базового кода.</p>
+            <a href="https://chatgpt.com" target="_blank" class="btn">Перейти</a>
+        </div>
+
+        <div class="card card-item code">
+            <h3>Claude</h3>
+            <span class="tag">Freemium</span>
+            <p>Хорошо работает с большими текстами и помогает разбираться в коде.</p>
+            <a href="https://claude.ai" target="_blank" class="btn">Перейти</a>
+        </div>
+
+        <div class="card card-item code">
+            <h3>DeepSeek</h3>
+            <span class="tag">Бесплатно</span>
+            <p>Бесплатная модель для программирования, математики и логических задач.</p>
+            <a href="https://chat.deepseek.com" target="_blank" class="btn">Перейти</a>
+        </div>
+
+        <div class="card card-item text">
+            <h3>Gemini</h3>
+            <span class="tag">Бесплатно</span>
+            <p>Нейросеть от Google для работы с текстом, поиском и учебными задачами.</p>
+            <a href="https://gemini.google.com" target="_blank" class="btn">Перейти</a>
+        </div>
+
+        <div class="card card-item image">
+            <h3>Midjourney</h3>
+            <span class="tag">Платно</span>
+            <p>Генерация картинок, иллюстраций и обложек по текстовому описанию.</p>
+            <a href="https://www.midjourney.com" target="_blank" class="btn">Перейти</a>
+        </div>
+
+        <div class="card card-item image">
+            <h3>Stable Diffusion</h3>
+            <span class="tag">Бесплатно</span>
+            <p>Популярная открытая нейросеть для создания и редактирования картинок.</p>
+            <a href="https://stability.ai" target="_blank" class="btn">Перейти</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2026 AI-Справочник</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
